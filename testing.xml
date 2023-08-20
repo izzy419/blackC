@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Suite">
+  <test name="Test">
+	  <parameter  name= "platformName" value="Android"/>
+	  <parameter  name= "deviceNme" value="Pixel_3a"/>
+	  <parameter  name= "platformVersion" value="11"/>
+    <classes>
+      <class name="bc.mobile.FirstTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
