@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
@@ -18,18 +19,15 @@ import com.qa.utilis.Testutilis;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 public class BaseTest {
 	
-	protected  AppiumDriver driver;
-	protected Properties props;
-	InputStream inputStream;
-	
-	//public BaseTest (AppiumDriver driver) {
-		// PageFactory.initElements(new AppiumFieldDecorator(driver) ,this);
-	// }
-	
+    protected static AppiumDriver driver;
+	protected static Properties props;
+	InputStream inputStream;	
+	 
 	
  
   @BeforeTest
@@ -48,6 +46,8 @@ public class BaseTest {
 			caps.setCapability(MobileCapabilityType.DEVICE_NAME, props.getProperty("anyDeviceNmae"));
 			caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, props.getProperty("androidAutomationName"));
 			caps.setCapability(MobileCapabilityType.UDID,"emulator-5554");	
+			caps.setCapability("autoGrantPermissions", true);	
+	
 			
 			/*
 			 * URL appURL = getClass().getClassLoader().getResource(props.
@@ -66,7 +66,9 @@ public class BaseTest {
 			
 			 driver = new AndroidDriver(url, caps);
 			 String sessionId = driver.getSessionId().toString();
-				System.out.println(sessionId);	 
+				System.out.println(sessionId);
+				
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 				
 				By skipBtn = AppiumBy.accessibilityId("com.blackcopper:id/welcome-skip-button");
 				By agreeToTermsCheckbox = AppiumBy.accessibilityId("com.blackcopper:id/location-notice-agreement--button");
@@ -89,7 +91,7 @@ public class BaseTest {
   
         public void waitForVisibility(WebElement e) {
         	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Testutilis.WAIT));
-        	wait.until(ExpectedConditions.invisibilityOf(e));
+        	wait.until(ExpectedConditions.visibilityOf(e));
         	 }
         
         public void click (WebElement e) {
@@ -97,19 +99,25 @@ public class BaseTest {
         	e.click();
         }
         
+        public void clear (WebElement e) {
+        	waitForVisibility(e);
+        	e.clear();
+        }
+        
         public void sendKeys (WebElement e, String txt) {
         	waitForVisibility(e);
         	e.sendKeys(txt);
         }
         
-        public void getAttribute (WebElement e, String attribute) {
+        public String getAttribute (WebElement e, String attribute) {
         	waitForVisibility(e);
-        	e.getAttribute(attribute);
+        	return e.getAttribute(attribute);
         }
 	
 
  @AfterTest
   public void afterTest() {
+	 driver.quit();
   }
 
 }
