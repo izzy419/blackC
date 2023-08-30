@@ -3,13 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="bc.mobile.NewTest">
+      <class name="com.qa.tests.LoginTests">
         <methods>
-          <include name="afterClass"/>
+          <include name="beforeMethod"/>
+          <include name="afterTest"/>
           <include name="beforeClass"/>
-          <include name="f"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
+          <include name="afterClass"/>
+          <include name="successfulLogin"/>
         </methods>
-      </class> <!-- bc.mobile.NewTest -->
+      </class> <!-- com.qa.tests.LoginTests -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

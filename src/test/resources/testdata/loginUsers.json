@@ -1,0 +1,16 @@
+{
+   "invalidEmailOrPhone":{
+     "email":"Oladehinde@gmail",
+     "password":"Damilola1"
+   },
+   "inavlidPassword":{
+     "email":"oladehindedammi@gmail.com",
+     "password":"Damilola"  
+   },
+   "validEmailAndPassword":{
+    "email":"oladehindedammi@gmail.com",
+     "password":"Damilola1" 
+   }
+
+
+}

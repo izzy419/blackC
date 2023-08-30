@@ -19,7 +19,7 @@ public class Dashboard extends BaseTest{
 	
 	
 	 public String getAccNo() {
-		 return getAttribute(dashbrdAcctNo, "Text");
+		 return getAttribute(dashbrdAcctNo, "text");
  
 	 }
 	 

@@ -54,10 +54,12 @@ public class Login extends BaseTest {
 		 return this;
 	 }
 	 
-	 public Login pressLoginBtn() {
+	 public Dashboard pressLoginBtn() {
 		 click(loginButton);
-		 return this;
+		 return new Dashboard(driver);
 	 }
+	 
+
 	 
 	 public Login pressDismissBtn () {
 		 click(dismissBtn);
