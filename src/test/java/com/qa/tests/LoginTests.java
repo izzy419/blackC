@@ -1,9 +1,11 @@
 package com.qa.tests;
 
 import org.testng.annotations.Test;import com.qa.BaseTest;
+import com.qa.screens.AccountInfoScreen;
 import com.qa.screens.Dashboard;
 import com.qa.screens.Login;
-
+import com.qa.screens.NavScreen;
+import com.qa.screens.ProfileScreen;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
@@ -12,6 +14,7 @@ import org.testng.annotations.BeforeClass;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.time.Duration;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -22,6 +25,9 @@ public class LoginTests extends BaseTest {
 
 	Login login;
 	Dashboard dashboard;
+	NavScreen navScreen;
+	ProfileScreen profile;
+	AccountInfoScreen acctInfo;
 	InputStream loginData;
 	JSONObject loginUsers;
 	
@@ -35,6 +41,7 @@ public class LoginTests extends BaseTest {
 			loginUsers = new JSONObject(tokener);
 		}catch(Exception e){
 			e.printStackTrace();
+			throw e;
 		}finally {
 			if(loginData != null) {
 				loginData.close();
@@ -99,7 +106,7 @@ public class LoginTests extends BaseTest {
   }
   
   @Test
-  public void successfulLogin() {
+  public void successfulLogin() throws Exception {
 	  login.enterEmailorPhone(loginUsers.getJSONObject("validEmailAndPassword").getString("email"));
 	  login.enterPassword(loginUsers.getJSONObject("validEmailAndPassword").getString("password"));
 	  dashboard = login.pressLoginBtn();
@@ -107,9 +114,10 @@ public class LoginTests extends BaseTest {
 	  String actualDash = dashboard.getAccNo();
 	  String expectedDash = "1026131920";
 	  
-	  System.out.println("Actual Dashboard Display: " + actualDash + "\n " + " Expected Dashboard Display: " + expectedDash);
+	  System.out.println("Actual Dashboard Display: " + actualDash + "\n " + "Expected Dashboard Display: " + expectedDash);
 	  
 	  Assert.assertEquals(actualDash, expectedDash);
+	  
 	  
   }
 

@@ -29,8 +29,7 @@ public class Login extends BaseTest {
 	
     @AndroidFindBy (accessibility = "com.blackcopper:id/alert-default-dismiss-button") private WebElement dismissBtn;
 	
-
-	
+    
 	
 	 public Login enterEmailorPhone (String email) {
 		 sendKeys(emailOrPhonenumberTxtFld, email);
@@ -74,7 +73,10 @@ public class Login extends BaseTest {
 	 public String getErrMsg() {
 		 return getAttribute(errorMsg, "text");
 	 }
+
+	
 	 
+	
 }
 
 

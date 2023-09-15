@@ -14,10 +14,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import com.google.common.collect.ImmutableMap;
 import com.qa.utilis.Testutilis;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -50,8 +52,9 @@ public class BaseTest {
 	
 			
 			/*
-			 * URL appURL = getClass().getClassLoader().getResource(props.
-			 * getProperty("app/blackcopper-release (7).apk")); caps.setCapability("app",
+			 * String appURL = getClass().getResource(props.
+			 * getProperty("androidAppLocation")).getFile();
+			 *  caps.setCapability("app",
 			 * appURL);
 			 */
 			
@@ -68,7 +71,7 @@ public class BaseTest {
 			 String sessionId = driver.getSessionId().toString();
 				System.out.println(sessionId);
 				
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 				
 				By skipBtn = AppiumBy.accessibilityId("com.blackcopper:id/welcome-skip-button");
 				By agreeToTermsCheckbox = AppiumBy.accessibilityId("com.blackcopper:id/location-notice-agreement--button");
@@ -93,6 +96,7 @@ public class BaseTest {
         	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Testutilis.WAIT));
         	wait.until(ExpectedConditions.visibilityOf(e));
         	 }
+      
         
         public void click (WebElement e) {
         	waitForVisibility(e);
@@ -113,7 +117,13 @@ public class BaseTest {
         	waitForVisibility(e);
         	return e.getAttribute(attribute);
         }
-	
+        public void tap (int x, int y) {
+         driver.executeScript("mobile: clickGesture", ImmutableMap.of(
+        			    "x",x,
+        			    "y",y
+        			));
+        }
+
 
  @AfterTest
   public void afterTest() {

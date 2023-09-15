@@ -18,9 +18,11 @@ public class Dashboard extends BaseTest{
 	@AndroidFindBy (xpath = "//android.view.ViewGroup[@content-desc=\"com.blackcopper:id/home-copy-account-number-button\"]/android.widget.TextView[1]") private WebElement dashbrdAcctNo;
 	
 	
+	
 	 public String getAccNo() {
 		 return getAttribute(dashbrdAcctNo, "text");
  
 	 }
 	 
+	
 }
